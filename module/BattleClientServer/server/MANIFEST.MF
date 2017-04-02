@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Created-By: M.Olszewski
+Specification-Title: Battle Server
+Main-Class: net.java.dante.gui.server.ServerLogic
+Build-Jdk: 1.6.0
+Built-By: M.Olszewski
+Implementation-Title: battleserver
+Implementation-Version: 0.5.0
+Package: net.java.dante.gui.server
+
+Name: org/slf4j/
+Implementation-Title: Simple implementation
+Implementation-Version: 1.0.1
+Implementation-Vendor: SLF4J.ORG
+
+Name: org/apache/mina
+Specification-Title: A Multipurpose Infrastrusture for Network Applications
+Implementation-Title: org.apache.mina
+Implementation-Version: 0.8.3
+Implementation-Vendor: mina.apache.org

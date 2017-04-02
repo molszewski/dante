@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Tue Apr 17 17:28:16 CEST 2007
+onejar.license.required=true
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=false
+jarname=lib/dante.algorithmslayer.jar
+manifest.mergeall=false
+manifest.mainclass=
+manifest.file=module\\AlgorithmsFramework\\MANIFEST.MF
+jarname.isextern=false
+onejar.expand=
+excludes=<po|dante>~net/~java/~dante/~algorithms/~examples/;<po|dante>~net/~java/~dante/~algorithms/~flock/;<po|dante>~net/~java/~dante/~algorithms/~rl/;<po|dante>~net/~java/~dante/~darknet/;<po|dante>~net/~java/~dante/~gui/;<po|dante>~net/~java/~dante/~receiver/;<po|dante>~net/~java/~dante/~sim/;<jar|mina-0.8.3.jar>;<jar|qLearningFramework.jar>;<jar|slf4j-simple.jar>;<jar|dante.darknet.jar>;<jar|junit.jar>;<jar|dante.sim.jar>;<jar|dante.receiver.jar>;<jar|darkNet.jar>;<jar|algorithmsLayer.jar>;<jar|receiver.jar>;<jar|simulation.jar>;<jar|dante.algorithmslayer.jar>
+includes=

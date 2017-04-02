@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Tue Apr 17 15:53:21 CEST 2007
+onejar.license.required=true
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=false
+jarname=lib/dante.receiver.jar
+manifest.mergeall=true
+manifest.mainclass=
+manifest.file=<createnew>
+jarname.isextern=false
+onejar.expand=
+excludes=<po|dante>~net/~java/~dante/~algorithms/;<po|dante>~net/~java/~dante/~darknet/;<po|dante>~net/~java/~dante/~gui/;<po|dante>~net/~java/~dante/~sim/;<jar|mina-0.8.3.jar>;<jar|qLearningFramework.jar>;<jar|slf4j-simple.jar>;<jar|junit.jar>;<jar|algorithmsLayer.jar>;<jar|darkNet.jar>;<jar|receiver.jar>;<jar|simulation.jar>;<jar|dante.sim.jar>;<jar|dante.receiver.jar>
+includes=

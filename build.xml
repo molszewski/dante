@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- 
+ Created by:           M.Olszewski
+ Created on:           2007-04-23
+ Last modification on: $Date:: 2007-05-10 11:11:45#$                   
+ Last revision number: $Revision: 90 $
+-->
+
+<project basedir="." default="build" name="dante">
+
+<!-- PROPERTIES -->
+
+  <!-- Compilation parameters -->
+  <property name="debuglevel"           value="source,lines,vars" />
+  <property name="target"               value="1.5" />
+  <property name="source"               value="1.5" />
+
+  <!-- Directories -->
+  <property name="dir.build"            value="bin" />
+  <property name="dir.lib"              value="lib" />
+  <property name="dir.module"           value="module" />
+
+  <!-- Modules names -->
+  <property name="module.darknet"       value="${dir.module}/DarkNet" />
+  <property name="module.receiver"      value="${dir.module}/Receiver" />
+  <property name="module.sim"           value="${dir.module}/Simulation" />
+  <property name="module.algorithms"    value="${dir.module}/AlgorithmsFramework" />
+  <property name="module.gui"           value="${dir.module}/BattleClientServer" />
+  
+  <!-- Algorithms implementation names -->
+  <property name="alg_impl.flock"       value="net/java/dante/algorithms/flock/" />
+  <property name="alg_impl.rl"          value="net/java/dante/algorithms/rl/" />
+  <property name="alg_impl.examples"     value="net/java/dante/algorithms/examples/" />
+  <property name="alg_impl.all"         value="${alg_impl.flock},${alg_impl.rl},${alg_impl.examples}" />
+
+  <!-- Release -->
+  <property name="release.version"      value="0.5.0" />
+  <property name="release.dir.in"       value="release" />
+  <property name="release.dir.in.alg"   value="${release.dir.in}/algorithms" />
+  <property name="release.dir.out"      value="out" />
+  <property name="release.dir.out.std"  value="${release.dir.out}/${ant.project.name}.v${release.version}" />
+  <property name="release.dir.out.src"  value="${release.dir.out}/${ant.project.name}.v${release.version}-Source" />
+  <property name="release.dir.out.full" value="${release.dir.out}/${ant.project.name}.v${release.version}-Full" />
+  <property name="release.dir.out.bin"  value="bin" />
+
+  <!-- JAR creation -->
+  <property name="jar.dir.out"          value="${release.dir.in}" />
+  <property name="jar.manifest"         value="MANIFEST.MF" />
+  <property name="jar.darknet"          value="${ant.project.name}.darknet.v1.0.0.jar" />
+  <property name="jar.receiver"         value="${ant.project.name}.receiver.v${release.version}.jar" />
+  <property name="jar.sim"              value="${ant.project.name}.sim.v${release.version}.jar" />
+  <property name="jar.algorithms"       value="${ant.project.name}.algorithms_framework.v${release.version}.jar" />
+  <property name="jar.client"           value="${ant.project.name}.battle_client.v${release.version}.jar" />
+  <property name="jar.server"           value="${ant.project.name}.battle_server.v${release.version}.jar" />
+
+  <!-- Exclusion filters -->
+  <property name="filter.init"          value="**/*.uad, **/*.ucd, **/*.uld, **/*.upd, **/*.udd, **/*.uod, **/*.usd, **/*.utd, **/*.uud, **/*.odd, **/*.ead, **/*.ecd, **/*.eld, **/*.epd, **/*.edd, **/*.eod, **/*.esd, **/*.etd, **/*.eud, **/*.urd*.uml, **/*.ecore, **/*.launch, **/*.java, **/*.MF **/*.fatjar" />
+  <property name="filter.compile.tests" value="**/*Test*.java" />
+  <property name="filter.algorithms"    value="${alg_impl.all}" />
+  <property name="filter.server"        value="${filter.algorithms},net/java/dante/gui/client/" />
+  <property name="filter.client"        value="${filter.algorithms},net/java/dante/gui/server/" />
+
+  <!-- External JAR files that are inlined -->
+  <zipfileset id="dante.lib.mina"       src="${dir.lib}/mina-0.8.3.jar" />
+  <zipfileset id="dante.lib.slf4j"      src="${dir.lib}/slf4j-simple.jar" />
+
+  <!-- File sets for algorithms implementations release -->
+  <fileset id="release.alg_impl.flock"    dir="${dir.build}" includes="${alg_impl.flock}" />
+  <fileset id="release.alg_impl.rl"       dir="${dir.build}" includes="${alg_impl.rl}" />
+  <fileset id="release.alg_impl.examples" dir="${dir.build}" includes="${alg_impl.examples}" />
+  <fileset id="release.alg_impl.all"      dir="${dir.build}" includes="${alg_impl.all}" />
+  
+  <!-- Files for release -->
+  <fileset id="release.licence"         file="${release.dir.in}/LGPL.html" />
+  <fileset id="release.readme"          file="${release.dir.in}/readme.html" />
+  <fileset id="release.bin"             dir="${release.dir.in}" includes="${ant.project.name}*.jar" />
+  <fileset id="release.algorithms_impl" dir="${release.dir.in}" includes="algorithms/" />
+  <fileset id="release.lib"             dir="." includes="${dir.lib}/" />
+  <fileset id="release.src"             dir="." includes="${dir.module}/" />
+
+  <!-- Class path -->
+  <path id="dante.classpath">
+    <pathelement location="bin" />
+    <pathelement location="lib/mina-0.8.3.jar" />
+    <pathelement location="lib/qLearningFramework.jar" />
+    <pathelement location="lib/slf4j-simple.jar" />
+    <pathelement location="lib/junit-4.3.1.jar" />
+  </path>
+
+
+<!-- TARGETS -->
+
+  <!-- Cleaning -->
+
+  <target name="clean">
+    <delete dir="${dir.build}" />
+    <delete dir="${release.dir.out}" />
+  </target>
+
+
+  <!-- Initialization -->
+
+  <target name="pre-init">
+    <mkdir dir="${dir.build}" />
+    <mkdir dir="${release.dir.in}" />
+  </target>
+  <target depends="pre-init" name="init-darknet">
+    <copy includeemptydirs="false" todir="bin">
+      <fileset dir="${module.darknet}" excludes="${filter.init}" />
+    </copy>
+  </target>
+  <target depends="pre-init" name="init-receiver">
+    <copy includeemptydirs="false" todir="bin">
+      <fileset dir="${module.receiver}" excludes="${filter.init}" />
+    </copy>
+  </target>
+  <target depends="pre-init" name="init-sim">
+    <copy includeemptydirs="false" todir="bin">
+      <fileset dir="${module.sim}" excludes="${filter.init}" />
+    </copy>
+  </target>
+  <target depends="pre-init" name="init-algorithms">
+    <copy includeemptydirs="false" todir="bin">
+      <fileset dir="${module.algorithms}" excludes="${filter.init}" />
+    </copy>
+  </target>
+  <target depends="pre-init" name="init-server_client">
+    <copy includeemptydirs="false" todir="bin">
+      <fileset dir="${module.gui}" excludes="${filter.init}" />
+    </copy>
+  </target>
+  <target depends="clean,init-darknet,init-receiver,init-sim,init-algorithms,init-server_client" name="init">
+  </target>
+
+
+  <!-- Build with debugs, also build tests -->
+
+  <target depends="init-darknet" name="darknet.dbg">
+    <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
+      <src path="${module.darknet}/src" />
+      <classpath refid="dante.classpath" />
+    </javac>
+  </target>
+  <target depends="init-receiver" name="receiver.dbg">
+    <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
+      <src path="${module.receiver}/src" />
+      <classpath refid="dante.classpath" />
+    </javac>
+  </target>
+  <target depends="init-sim" name="sim.dbg">
+    <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
+      <src path="${module.sim}/src" />
+      <classpath refid="dante.classpath" />
+    </javac>
+  </target>
+  <target depends="init-algorithms,receiver.dbg,sim.dbg" name="algorithms.dbg">
+    <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
+      <src path="${module.algorithms}/src" />
+      <classpath refid="dante.classpath" />
+    </javac>
+  </target>
+  <target depends="init-server_client,darknet.dbg,algorithms.dbg" name="server_client.dbg">
+    <javac debug="true" debuglevel="${debuglevel}" destdir="bin" source="${source}" target="${target}">
+      <src path="${module.gui}/src" />
+      <classpath refid="dante.classpath" />
+    </javac>
+  </target>
+  <target depends="clean,init,server_client.dbg" name="build.dbg">
+  </target>
+
+
+  <!-- Build (without debugs and tests) -->
+
+  <target depends="init-darknet" name="darknet">
+    <javac destdir="bin" source="${source}" target="${target}" excludes="${filter.compile.tests},net/java/dante/darknet/test**">
+      <src path="${module.darknet}/src" />
+      <classpath refid="dante.classpath" />
+    </javac>
+  </target>
+  <target depends="init-receiver" name="receiver">
+    <javac destdir="bin" source="${source}" target="${target}" excludes="${filter.compile.tests}">
+      <src path="${module.receiver}/src" />
+      <classpath refid="dante.classpath" />
+    </javac>
+  </target>
+  <target depends="init-sim" name="sim">
+    <javac destdir="bin" source="${source}" target="${target}" excludes="${filter.compile.tests},net/java/dante/sim/StartPoint.java">
+      <src path="${module.sim}/src" />
+      <classpath refid="dante.classpath" />
+    </javac>
+  </target>
+  <target depends="init-algorithms,receiver,sim" name="algorithms">
+    <javac destdir="bin" source="${source}" target="${target}" excludes="${filter.compile.tests}">
+      <src path="${module.algorithms}/src" />
+      <classpath refid="dante.classpath" />
+    </javac>
+  </target>
+  <target depends="init-server_client,darknet,algorithms" name="server_client">
+    <javac destdir="bin" source="${source}" target="${target}" excludes="${filter.compile.tests}">
+      <src path="${module.gui}/src" />
+      <classpath refid="dante.classpath" />
+    </javac>
+  </target>
+  <target depends="clean,init,server_client" name="build">
+  </target>
+
+
+  <!-- Create JARs -->
+
+  <target depends="darknet" name="darknet.jar">
+    <jar destfile="${jar.dir.out}/${jar.darknet}" manifest="${module.darknet}/${jar.manifest}">
+      <fileset dir="${dir.build}" includes="net/java/dante/darknet/" />
+      <zipfileset refid="dante.lib.mina" />
+      <zipfileset refid="dante.lib.slf4j" />
+    </jar>
+  </target>
+  <target depends="receiver" name="receiver.jar">
+    <jar destfile="${jar.dir.out}/${jar.receiver}" manifest="${module.receiver}/${jar.manifest}">
+      <fileset dir="${dir.build}" includes="net/java/dante/receiver/" />
+    </jar>
+  </target>
+  <target depends="sim" name="sim.jar">
+    <jar destfile="${jar.dir.out}/${jar.sim}" manifest="${module.sim}/${jar.manifest}">
+      <fileset dir="${dir.build}" includes="res/,net/java/dante/sim/" />
+    </jar>
+  </target>
+  <target depends="algorithms" name="algorithms.jar">
+    <jar destfile="${jar.dir.out}/${jar.algorithms}" manifest="${module.algorithms}/${jar.manifest}">
+      <fileset dir="${dir.build}" includes="res/,net/java/dante/algorithms/,net/java/dante/sim/,net/java/dante/receiver/" excludes="${filter.algorithms}" />
+    </jar>
+  </target>
+  <target depends="server_client" name="server.jar">
+    <jar destfile="${jar.dir.out}/${jar.server}" manifest="${module.gui}/server/${jar.manifest}">
+      <fileset dir="${dir.build}" excludes="${filter.server}" />
+      <zipfileset refid="dante.lib.mina" />
+      <zipfileset refid="dante.lib.slf4j" />
+    </jar>
+  </target>
+  <target depends="server_client" name="client.jar">
+    <jar destfile="${jar.dir.out}/${jar.client}" manifest="${module.gui}/client/${jar.manifest}">
+      <fileset dir="${dir.build}" excludes="${filter.client}" />
+      <zipfileset refid="dante.lib.mina" />
+      <zipfileset refid="dante.lib.slf4j" />
+    </jar>
+  </target>
+  <target depends="darknet.jar,receiver.jar,sim.jar,algorithms.jar,server.jar,client.jar" name="jar">
+  </target>
+  
+  <!-- Algorithms implementations -->
+
+  <target depends="algorithms" name="algorithms_impl">
+    <copy includeemptydirs="false" todir="${release.dir.in.alg}">
+      <fileset refid="release.alg_impl.all" />
+    </copy>
+  </target>
+  
+  <!-- Creating release -->
+
+  <target name="init-release.std">
+    <mkdir dir="${release.dir.out}" />
+    <mkdir dir="${release.dir.out.std}" />
+    <mkdir dir="${release.dir.out.std}/${release.dir.out.bin}" />
+  </target>
+
+  <target name="init-release.src">
+    <mkdir dir="${release.dir.out}" />
+    <mkdir dir="${release.dir.out.src}" />
+  </target>
+
+  <target name="init-release.full">
+    <mkdir dir="${release.dir.out}" />
+    <mkdir dir="${release.dir.out.full}" />
+    <mkdir dir="${release.dir.out.full}/${release.dir.out.bin}" />
+  </target>
+
+  <!-- Common releases target -->
+  <target depends="build,jar,algorithms_impl" name="releases.common">
+  </target>
+  
+  <!-- Standard release -->
+  <target depends="releases.common,init-release.std" name="release.std">
+    <copy includeemptydirs="false" todir="${release.dir.out.std}">
+      <fileset refid="release.licence" />
+      <fileset refid="release.readme" />
+    </copy>
+    <copy includeemptydirs="false" todir="${release.dir.out.std}/${release.dir.out.bin}">
+      <fileset refid="release.bin" />
+      <fileset refid="release.algorithms_impl" />
+    </copy>
+  </target>
+
+  <!-- Source code release -->
+  <target depends="releases.common,init-release.src" name="release.src">
+    <copy includeemptydirs="false" todir="${release.dir.out.src}">
+      <fileset refid="release.licence" />
+      <fileset refid="release.readme" />
+      <fileset refid="release.src" />
+      <fileset refid="release.lib" />
+      <fileset file="${ant.file}" />
+    </copy>
+  </target>
+
+  <!-- Full release -->
+  <target depends="releases.common,init-release.full" name="release.full">
+    <copy includeemptydirs="false" todir="${release.dir.out.full}">
+      <fileset refid="release.licence" />
+      <fileset refid="release.readme" />
+      <fileset refid="release.src" />
+      <fileset refid="release.lib" />
+      <fileset file="${ant.file}" />
+    </copy>
+    <copy includeemptydirs="false" todir="${release.dir.out.full}/${release.dir.out.bin}">
+      <fileset refid="release.bin" />
+      <fileset refid="release.algorithms_impl" />
+    </copy>
+  </target>
+
+  <!-- All releases -->
+  <target depends="release.std,release.src,release.full" name="release">
+  </target>
+
+</project>

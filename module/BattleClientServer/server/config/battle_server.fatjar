@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Wed Apr 18 15:28:01 CEST 2007
+onejar.license.required=false
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=false
+jarname=release/dante.battle_server.jar
+manifest.mergeall=false
+manifest.mainclass=net.java.dante.gui.server.ServerLogic
+manifest.file=module\\BattleClientServer\\server\\MANIFEST.MF
+jarname.isextern=false
+onejar.expand=
+excludes=<po|dante>~net/~java/~dante/~gui/~client/;<jar|qLearningFramework.jar>;<jar|dante.darknet.jar>;<jar|junit.jar>;<jar|dante.sim.jar>;<jar|dante.receiver.jar>;<jar|dante.algorithmslayer.jar>
+includes=<inc|dante/module\\Simulation>~res/~agent.config;<inc|dante/module\\Simulation>~res/~agent.png;<inc|dante/module\\Simulation>~res/~agent_base.png;<inc|dante/module\\Simulation>~res/~agent_big.png;<inc|dante/module\\Simulation>~res/~agent_explosion.png;<inc|dante/module\\Simulation>~res/~agent_old.png;<inc|dante/module\\Simulation>~res/~agent_small.png;<inc|dante/module\\Simulation>~res/~background.jpg;<inc|dante/module\\Simulation>~res/~main.config;<inc|dante/module\\Simulation>~res/~map.config;<inc|dante/module\\Simulation>~res/~projectile.png;<inc|dante/module\\Simulation>~res/~projectile_explosion.png;<inc|dante/module\\Simulation>~res/~tile.png;<inc|dante/module\\Simulation>~res/~weapon.config
