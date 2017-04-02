@@ -102,6 +102,19 @@ Setup *creating games client*:
 4. Both clients should connect with the server now and game should start.
 
 
+# Project Modules Summary
+
+Currently dante contains following modules:
+
+| Name                | Description                                       |
+|---------------------|---------------------------------------------------|
+| AlgorithmsFramework | Defines framework for AI algorithms run by dante. |
+| BattleClientServer  | Module containing client and server logic. |
+| DarkNet             | Module responsible for network communication. |
+| Receiver            | Simple module defining framework for message-driven applications. |
+| Simulation          | Module defining framework for algorithms environments, also called simulations. |
+
+
 # Full list of ant build targets
 
 | Name              | Description                                                                                                                                                    |
