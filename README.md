@@ -42,7 +42,7 @@ Use it and abuse it - it's here to serve you. Enjoy!
 
 **dante** provides Ant build script capable of building executable JAR containing dante battle client/server, 
 JARs containing dante modules or dante release packages.
-Before you can build any of the Ant targets listed below you have to have [Apache Ant|http://ant.apache.org/] 
+Before you can build any of the Ant targets listed below you have to have [Apache Ant](http://ant.apache.org/) 
 downloaded and installed. Then you can type `ant <target_name>`, e.g. `ant release` to build chosen target.
 
 To build **dante** binaries simply type:
@@ -134,9 +134,9 @@ Setup *creating games client*:
 # External dependencies
 
 Thanks to all of the authors and contributors of:
-* [Apache Ant|http://ant.apache.org/]
-* [Apache MINA (Multipurpose Infrastructure for Network Applications)|http://mina.apache.org/] - great network framework
-* [Fat Jar Eclipse Plug-In|http://fjep.sourceforge.net/] - great Eclipse plug-in, simplifying creation of Jar files
-* Free Connectionist Q-learning Java Framework (link no longer available) - Open Source Java library for developing simple or complicated learning systems
-* [JUnit|http://junit.org/junit4] - a simple framework to write repeatable unit tests
+* [Apache Ant](http://ant.apache.org/)
+* [Apache MINA (Multipurpose Infrastructure for Network Applications)](http://mina.apache.org/) - great network framework
+* [Fat Jar Eclipse Plug-In](http://fjep.sourceforge.net/) - great Eclipse plug-in, simplifying creation of Jar files
+* Free Connectionist Q-learning Java Framework (*link no longer available*) - Open Source Java library for developing simple or complicated learning systems
+* [JUnit](http://junit.org/junit4) - a simple framework to write repeatable unit tests
 
