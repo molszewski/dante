@@ -30,7 +30,7 @@
   <!-- Algorithms implementation names -->
   <property name="alg_impl.flock"       value="net/java/dante/algorithms/flock/" />
   <property name="alg_impl.rl"          value="net/java/dante/algorithms/rl/" />
-  <property name="alg_impl.examples"     value="net/java/dante/algorithms/examples/" />
+  <property name="alg_impl.examples"    value="net/java/dante/algorithms/examples/" />
   <property name="alg_impl.all"         value="${alg_impl.flock},${alg_impl.rl},${alg_impl.examples}" />
 
   <!-- Release -->
@@ -69,14 +69,14 @@
   <fileset id="release.alg_impl.rl"       dir="${dir.build}" includes="${alg_impl.rl}" />
   <fileset id="release.alg_impl.examples" dir="${dir.build}" includes="${alg_impl.examples}" />
   <fileset id="release.alg_impl.all"      dir="${dir.build}" includes="${alg_impl.all}" />
-  
+
   <!-- Files for release -->
-  <fileset id="release.licence"         file="LICENSE" />
-  <fileset id="release.readme"          file="README.md" />
-  <fileset id="release.bin"             dir="${release.dir.in}" includes="${ant.project.name}*.jar" />
-  <fileset id="release.algorithms_impl" dir="${release.dir.in}" includes="algorithms/" />
-  <fileset id="release.lib"             dir="." includes="${dir.lib}/" />
-  <fileset id="release.src"             dir="." includes="${dir.module}/" />
+  <fileset id="release.licence"    file="LICENSE" />
+  <fileset id="release.readme"     file="README.md" />
+  <fileset id="release.bin"        dir="${release.dir.in}" includes="${ant.project.name}*.jar" />
+  <fileset id="release.algorithms" dir="${release.dir.in}" includes="algorithms/" />
+  <fileset id="release.lib"        dir="." includes="${dir.lib}/" />
+  <fileset id="release.src"        dir="." includes="${dir.module}/" />
 
   <!-- Class path -->
   <path id="dante.classpath">
@@ -248,10 +248,11 @@
   
   <!-- Algorithms implementations -->
 
-  <target depends="algorithms" name="algorithms_impl">
+  <target depends="algorithms" name="algorithms_dependencies">
     <copy includeemptydirs="false" todir="${release.dir.in.alg}">
       <fileset refid="release.alg_impl.all" />
     </copy>
+    <unzip src="${dir.lib}/qLearningFramework.jar" dest="${release.dir.in.alg}" />
   </target>
   
   <!-- Creating release -->
@@ -274,7 +275,7 @@
   </target>
 
   <!-- Common releases target -->
-  <target depends="build,jar,algorithms_impl" name="releases.common">
+  <target depends="build,jar,algorithms_dependencies" name="releases.common">
   </target>
   
   <!-- Standard release -->
@@ -285,7 +286,7 @@
     </copy>
     <copy includeemptydirs="false" todir="${release.dir.out.std}/${release.dir.out.bin}">
       <fileset refid="release.bin" />
-      <fileset refid="release.algorithms_impl" />
+      <fileset refid="release.algorithms" />
     </copy>
   </target>
 
@@ -311,7 +312,7 @@
     </copy>
     <copy includeemptydirs="false" todir="${release.dir.out.full}/${release.dir.out.bin}">
       <fileset refid="release.bin" />
-      <fileset refid="release.algorithms_impl" />
+      <fileset refid="release.algorithms" />
     </copy>
   </target>
 
