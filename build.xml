@@ -35,9 +35,9 @@
 
   <!-- Release -->
   <property name="release.version"      value="0.5.0" />
-  <property name="release.dir.in"       value="release" />
-  <property name="release.dir.in.alg"   value="${release.dir.in}/algorithms" />
   <property name="release.dir.out"      value="out" />
+  <property name="release.dir.in"       value="${release.dir.out}/release" />
+  <property name="release.dir.in.alg"   value="${release.dir.in}/algorithms" />
   <property name="release.dir.out.std"  value="${release.dir.out}/${ant.project.name}.v${release.version}" />
   <property name="release.dir.out.src"  value="${release.dir.out}/${ant.project.name}.v${release.version}-Source" />
   <property name="release.dir.out.full" value="${release.dir.out}/${ant.project.name}.v${release.version}-Full" />
@@ -71,8 +71,8 @@
   <fileset id="release.alg_impl.all"      dir="${dir.build}" includes="${alg_impl.all}" />
   
   <!-- Files for release -->
-  <fileset id="release.licence"         file="${release.dir.in}/LGPL.html" />
-  <fileset id="release.readme"          file="${release.dir.in}/readme.html" />
+  <fileset id="release.licence"         file="LICENSE" />
+  <fileset id="release.readme"          file="README.md" />
   <fileset id="release.bin"             dir="${release.dir.in}" includes="${ant.project.name}*.jar" />
   <fileset id="release.algorithms_impl" dir="${release.dir.in}" includes="algorithms/" />
   <fileset id="release.lib"             dir="." includes="${dir.lib}/" />
