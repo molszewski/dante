@@ -10,7 +10,11 @@ as robots) that explore a specified simple 2D environment and try to eliminate a
 
 **dante** also provides separate modules with well-defined roles that may be easily reused in other projects 
 (e.g. network layer, simulation layer).
- 
+
+Some screenshots to show **dante** in the action:
+
+![dante in action first screenshot](readme/screenshot001.png)
+![dante in action second screenshot](readme/screenshot002.png)
 
 # Dear Reader, please read below and be kind  
 
@@ -28,8 +32,9 @@ Use it and abuse it - it's here to serve you. Enjoy!
 
 # Features
 
-* Extensible testing environment
-* Client/server architecture
+* Extensible testing environment for AI algorithms
+* Implementation of Reinforced Learning Algorithm and Flock Algorithm
+* Client/server architecture over TCP
 * Simple 2D graphics engine implementation with collision detection and animations
 * Module separation
 
