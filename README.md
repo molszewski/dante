@@ -13,8 +13,8 @@ as robots) that explore a specified simple 2D environment and try to eliminate a
 
 Some screenshots to show **dante** in the action:
 
-![dante in action first screenshot](readme/screenshot001.png)
-![dante in action second screenshot](readme/screenshot002.png)
+![dante in action first screenshot](readme/server_screenshot001.png)
+![dante in action second screenshot](readme/server_screenshot002.png)
 
 # Dear Reader, please read below and be kind  
 
